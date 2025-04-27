@@ -1,0 +1,17 @@
+1-react-native-responsive-screen
+https://www.npmjs.com/package/react-native-responsive-screen
+
+2-reAnimated
+https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/your-first-animation
+
+3-react-native-heroicons
+https://www.npmjs.com/package/react-native-heroicons
+
+4-@react-native-seoul/masonry-list
+https://www.npmjs.com/package/@react-native-seoul/masonry-list
+
+5-tanstack
+https://tanstack.com/query/latest/docs/framework/react/installation
+
+6-Async Storage
+https://react-native-async-storage.github.io/async-storage/docs/install
