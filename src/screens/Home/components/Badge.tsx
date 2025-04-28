@@ -15,7 +15,10 @@ const Badge = ({ icon, title, subTitle }) => {
         <Text style={{ fontSize: hp(2) }} className="text-gray-500 text-center">
           {title}
         </Text>
-        <Text style={{ fontSize: hp(1.8) }} className="font-medium text-center">
+        <Text
+          style={{ fontSize: hp(1.8) }}
+          className="font-medium text-center text-black "
+        >
           {subTitle}
         </Text>
       </View>
