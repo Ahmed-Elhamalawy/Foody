@@ -20,10 +20,15 @@ import {
 } from "react-native-responsive-screen";
 import { useForm, Controller } from "react-hook-form";
 import { useNavigation } from "@react-navigation/native";
+import { useLogin, useSignup } from "../../hooks/Https";
+import { AuthContext } from "../../store/auth-context";
+import { useContext } from "react";
 
 const LoginScreen = () => {
-  const [showLogin, setShowLogin] = useState(true);
   const navigation = useNavigation();
+  const { mutate } = useLogin();
+  const { isLoggedIn, login, logout, token } = useContext(AuthContext);
+  console.log("Is logged in:", isLoggedIn);
 
   const {
     control,
@@ -31,13 +36,32 @@ const LoginScreen = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      fullname: "",
       email: "",
       password: "",
     },
   });
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    mutate(
+      {
+        email: data.email,
+        password: data.password,
+      },
+      {
+        onSuccess: (response) => {
+          console.log("User signed in:", response);
+          if (response.idToken) {
+            login(response.idToken);
+          }
+
+          navigation.navigate("Home");
+        },
+        onError: (error) => {
+          console.error("login error:", error.response?.data?.error?.message);
+        },
+      }
+    );
+  };
 
   return (
     <>
@@ -76,54 +100,16 @@ const LoginScreen = () => {
                   <Text
                     style={{
                       fontSize: hp(4),
-                      marginBottom: showLogin ? hp(5) : "none",
+                      marginBottom: hp(5),
                     }}
                     className="text-slate-600 font-bold"
                   >
-                    {showLogin ? "Login" : "Sign Up"}
+                    Login
                   </Text>
                 </View>
 
                 {/* Form Fields */}
-                <View style={{ gap: showLogin ? hp(3) : hp(2.5) }}>
-                  {/* FullName Label and Input */}
-                  <View
-                    style={{
-                      display: showLogin ? "none" : "flex",
-                      position: "relative",
-                    }}
-                  >
-                    <Text
-                      style={{ fontSize: hp(2.5) }}
-                      className="text-slate-600 mb-2 font-medium"
-                    >
-                      Fullname
-                    </Text>
-
-                    <Controller
-                      control={control}
-                      rules={{
-                        required: true,
-                      }}
-                      render={({ field: { onChange, onBlur, value } }) => (
-                        <TextInput
-                          className="rounded-lg p-3 bg-gray-100"
-                          style={{ fontSize: hp(1.8), height: hp(5) }}
-                          placeholder="Enter your Fullname"
-                          onBlur={onBlur}
-                          onChangeText={onChange}
-                          value={value}
-                        />
-                      )}
-                      name="fullname"
-                    />
-                    {errors.fullname && (
-                      <Text className="absolute bottom-0 translate-y-[20px] text-red-500">
-                        This is required.
-                      </Text>
-                    )}
-                  </View>
-
+                <View style={{ gap: hp(3) }}>
                   {/* Email Label and Input */}
                   <View className="relative">
                     <Text
@@ -197,44 +183,19 @@ const LoginScreen = () => {
                   </View>
 
                   <View>
-                    {/* have an account / create new account */}
+                    {/* button submit */}
+
                     <TouchableOpacity
-                      onPress={() => navigation.navigate("Signup")}
+                      onPress={handleSubmit(onSubmit)}
+                      className="bg-amber-500 rounded-full p-4 items-center mt-5"
                     >
                       <Text
                         style={{ fontSize: hp(2) }}
-                        className="text-slate-600 font-semibold"
+                        className="text-white font-bold text-base"
                       >
-                        Create Account
+                        Login
                       </Text>
                     </TouchableOpacity>
-
-                    {/* button submit */}
-                    {showLogin ? (
-                      <TouchableOpacity
-                        onPress={handleSubmit(onSubmit)}
-                        className="bg-amber-500 rounded-full p-4 items-center mt-5"
-                      >
-                        <Text
-                          style={{ fontSize: hp(2) }}
-                          className="text-white font-bold text-base"
-                        >
-                          Login
-                        </Text>
-                      </TouchableOpacity>
-                    ) : (
-                      <TouchableOpacity
-                        onPress={handleSubmit(onSubmit)}
-                        className="bg-amber-500 rounded-full p-4 items-center mt-5"
-                      >
-                        <Text
-                          style={{ fontSize: hp(2) }}
-                          className="text-white font-bold text-base"
-                        >
-                          Sign Up{" "}
-                        </Text>
-                      </TouchableOpacity>
-                    )}
                   </View>
                 </View>
               </ScrollView>

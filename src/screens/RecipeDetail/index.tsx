@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { ScrollView, Image, View } from "react-native";
 import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 import { useNavigation } from "@react-navigation/native";
-import { useGetRecipeDetails } from "../../hooks/GetAllRecipes";
+import { useGetRecipeDetails } from "../../hooks/Https";
 import { getIngredients, getInstructionSteps } from "../../helpers/recipeUtils";
 import RecipeHeader from "./components/RecipeHeader";
 import RecipeBadges from "./components/RecipeBadges";
@@ -22,10 +22,10 @@ const RecipeDetail = ({ route }) => {
   return (
     <ScrollView className="bg-white flex-1 relative">
       {/* Header Navigation Buttons */}
-      <HeaderButtons 
-        navigation={navigation} 
-        isFavorite={isFavorite} 
-        setIsFavorite={setIsFavorite} 
+      <HeaderButtons
+        navigation={navigation}
+        isFavorite={isFavorite}
+        setIsFavorite={setIsFavorite}
       />
 
       {/* Hero image */}
@@ -55,8 +55,8 @@ const RecipeDetail = ({ route }) => {
         {activeTab === "ingredients" ? (
           <IngredientsTab ingredients={getIngredients(data)} />
         ) : (
-          <InstructionsTab 
-            instructions={getInstructionSteps(data)} 
+          <InstructionsTab
+            instructions={getInstructionSteps(data)}
             youtubeLink={data?.strYoutube}
           />
         )}

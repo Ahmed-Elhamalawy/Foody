@@ -11,11 +11,10 @@ import Categories from "./components/Categories";
 import { useEffect, useState } from "react";
 import Recipes from "./components/Recipes";
 import { ScrollView } from "react-native-gesture-handler";
-import {
-  useGetAllCategories,
-  useGetAllRecipes,
-} from "../../hooks/GetAllRecipes";
+import { useGetAllCategories, useGetAllRecipes } from "../../hooks/Https";
 import Progress from "./components/Progress";
+import { useContext } from "react";
+import { AuthContext } from "../../store/auth-context";
 
 const HomeScreen = () => {
   const [activeCategory, setActiveCategory] = useState("Beef");
@@ -23,7 +22,8 @@ const HomeScreen = () => {
     useGetAllCategories();
   const { data: recipesData, isLoading: isRecipesLoading } =
     useGetAllRecipes(activeCategory);
-
+  const { isLoggedIn } = useContext(AuthContext);
+  console.log("isLoggedin", isLoggedIn);
   return (
     <SafeAreaView className="flex-1 bg-white" edges={["top"]}>
       <ScrollView showsVerticalScrollIndicator={false}>

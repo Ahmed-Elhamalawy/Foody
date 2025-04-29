@@ -20,9 +20,11 @@ import {
 } from "react-native-responsive-screen";
 import { useForm, Controller } from "react-hook-form";
 import { useNavigation } from "@react-navigation/native";
+import { useSignup } from "../../hooks/Https";
 
 const SignupScreen = () => {
   const navigation = useNavigation();
+  const { mutate, isLoading, isError, error } = useSignup();
   const {
     control,
     handleSubmit,
@@ -35,8 +37,24 @@ const SignupScreen = () => {
     },
   });
 
-  const onSubmit = (data) => console.log(data);
-
+  const onSubmit = (data) => {
+    mutate(
+      {
+        fullName: data.fullname,
+        email: data.email,
+        password: data.password,
+      },
+      {
+        onSuccess: (response) => {
+          console.log("User created:", response);
+          navigation.navigate("Login");
+        },
+        onError: (error) => {
+          console.error("Signup error:", error.response?.data?.error?.message);
+        },
+      }
+    );
+  };
   return (
     <>
       <StatusBar barStyle={"dark-content"} />
