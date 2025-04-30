@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 import { Image, StatusBar, Text, TextInput, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { BellIcon, MagnifyingGlassIcon } from "react-native-heroicons/outline";
@@ -27,7 +25,7 @@ const HomeScreen = () => {
   return (
     <SafeAreaView className="flex-1 bg-white" edges={["top"]}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <StatusBar barStyle="dark" />
+        <StatusBar barStyle="dark-content" />
         {/* avatar and bell icon */}
         <View className="flex-row items-center justify-between mx-4 ">
           <Image
@@ -67,7 +65,7 @@ const HomeScreen = () => {
         </View>
         {/* Categories Section  */}
 
-        <View className="mt-4 mx-4">
+        <View className="mt-4">
           {!isCategoriesLoading && (
             <Categories
               categoryList={categoriesData?.categories || []}

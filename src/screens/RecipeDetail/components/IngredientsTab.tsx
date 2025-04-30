@@ -1,13 +1,11 @@
-// @ts-nocheck
-
 import React from "react";
 import { View, Text } from "react-native";
 
-const IngredientsTab = ({ ingredients }) => {
+const IngredientsTab = ({ ingredients }: any) => {
   return (
     <View>
       <Text className="text-xl font-bold mb-4">What You'll Need</Text>
-      {ingredients.map((item, index) => (
+      {ingredients.map((item: any, index: number) => (
         <View
           key={index}
           className="flex-row items-center mb-3 pb-3 border-b border-gray-100"

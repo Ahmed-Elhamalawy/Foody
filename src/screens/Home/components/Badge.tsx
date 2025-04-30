@@ -1,10 +1,8 @@
-// @ts-nocheck
 import React from "react";
 import { Text, View } from "react-native";
-import { ClockIcon } from "react-native-heroicons/outline";
 import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 
-const Badge = ({ icon, title, subTitle }) => {
+const Badge = ({ icon, title, subTitle }: any) => {
   return (
     <View
       style={{ height: hp(16), width: hp(10) }}

@@ -1,11 +1,9 @@
-// @ts-nocheck
-
 import React from "react";
 import { TouchableOpacity } from "react-native";
 import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 import { ChevronLeftIcon, HeartIcon } from "react-native-heroicons/outline";
 
-const HeaderButtons = ({ navigation, isFavorite, setIsFavorite }) => {
+const HeaderButtons = ({ navigation, isFavorite, setIsFavorite }: any) => {
   return (
     <>
       {/* Back button */}

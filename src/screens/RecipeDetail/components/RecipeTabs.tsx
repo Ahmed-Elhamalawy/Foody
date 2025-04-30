@@ -1,8 +1,7 @@
-// @ts-nocheck
 import React from "react";
 import { View, TouchableOpacity, Text } from "react-native";
 
-const RecipeTabs = ({ activeTab, setActiveTab }) => {
+const RecipeTabs = ({ activeTab, setActiveTab }: any) => {
   return (
     <View className="flex-row justify-around border-b border-gray-200 px-5">
       <TouchableOpacity

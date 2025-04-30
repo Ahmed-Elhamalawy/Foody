@@ -1,4 +1,3 @@
-// @ts-nocheck
 import React, { useState } from "react";
 import {
   View,
@@ -41,7 +40,7 @@ const LoginScreen = () => {
     },
   });
 
-  const onSubmit = (data) => {
+  const onSubmit = (data: any) => {
     mutate(
       {
         email: data.email,
@@ -54,10 +53,13 @@ const LoginScreen = () => {
             login(response.idToken);
           }
 
-          navigation.navigate("Home");
+          navigation.navigate("Home" as never);
         },
         onError: (error) => {
-          console.error("login error:", error.response?.data?.error?.message);
+          console.error(
+            "login error:",
+            (error as any)?.response?.data?.error?.message || error.message
+          );
         },
       }
     );

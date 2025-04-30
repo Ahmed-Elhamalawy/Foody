@@ -1,7 +1,5 @@
-// @ts-nocheck
 import { useQuery, useMutation } from "@tanstack/react-query";
 import axios from "axios";
-import { AuthContext } from "../store/auth-context";
 
 // ---------------------------
 //           Api's
@@ -27,7 +25,7 @@ const getRecipeDetailsApi = async (id: string) => {
   return response?.data?.meals[0] || {};
 };
 
-const signUpApi = async ({ fullName, email, password }) => {
+const signUpApi = async ({ fullName, email, password }: any) => {
   const response = await axios.post(
     `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${"AIzaSyA_DImqX33lgggRBUzhLtRKLfDOnK5k8G8"}`,
     {
@@ -39,7 +37,7 @@ const signUpApi = async ({ fullName, email, password }) => {
   );
   return response.data;
 };
-const LoginApi = async ({ email, password }) => {
+const LoginApi = async ({ email, password }: any) => {
   const response = await axios.post(
     `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${"AIzaSyA_DImqX33lgggRBUzhLtRKLfDOnK5k8G8"}`,
     {
@@ -62,7 +60,6 @@ const useGetAllCategories = () => {
     queryKey: ["categories"],
     queryFn: getCategoriesApi,
     staleTime: 1000 * 60 * 60,
-    cacheTime: 1000 * 60 * 60, // 1 hour
   });
 };
 const useGetAllRecipes = (activeCategory: string) => {
@@ -70,7 +67,6 @@ const useGetAllRecipes = (activeCategory: string) => {
     queryKey: ["recipes", activeCategory],
     queryFn: () => getRecipesApi(activeCategory),
     staleTime: 1000 * 60 * 60,
-    cacheTime: 1000 * 60 * 60, // 1 hour
   });
 };
 const useGetRecipeDetails = (id: string) => {
@@ -78,7 +74,6 @@ const useGetRecipeDetails = (id: string) => {
     queryKey: ["recipe", id],
     queryFn: () => getRecipeDetailsApi(id),
     staleTime: 1000 * 60 * 60,
-    cacheTime: 1000 * 60 * 60, // 1 hour
   });
 };
 
@@ -87,18 +82,14 @@ const useGetRecipeDetails = (id: string) => {
 // --------------------------
 const useSignup = () => {
   return useMutation({
-    mutationFn: ({ fullName, email, password }) =>
+    mutationFn: ({ fullName, email, password }: any) =>
       signUpApi({ fullName, email, password }),
-    staleTime: 1000 * 60 * 60,
-    cacheTime: 1000 * 60 * 60,
   });
 };
 
 const useLogin = () => {
   return useMutation({
-    mutationFn: ({ email, password }) => LoginApi({ email, password }),
-    staleTime: 1000 * 60 * 60,
-    cacheTime: 1000 * 60 * 60,
+    mutationFn: ({ email, password }: any) => LoginApi({ email, password }),
   });
 };
 

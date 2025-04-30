@@ -1,4 +1,3 @@
-// @ts-nocheck
 import React from "react";
 import { View } from "react-native";
 import { ClockIcon, UserIcon, FireIcon } from "react-native-heroicons/outline";

@@ -1,4 +1,3 @@
-// @ts-nocheck
 import React, { useState } from "react";
 import { ScrollView, Image, View } from "react-native";
 import { heightPercentageToDP as hp } from "react-native-responsive-screen";
@@ -12,7 +11,7 @@ import IngredientsTab from "./components/IngredientsTab";
 import InstructionsTab from "./components/InstructionsTab";
 import HeaderButtons from "./components/HeaderButtons";
 
-const RecipeDetail = ({ route }) => {
+const RecipeDetail = ({ route }: any) => {
   const [isFavorite, setIsFavorite] = useState(false);
   const [activeTab, setActiveTab] = useState("ingredients");
   const navigation = useNavigation();

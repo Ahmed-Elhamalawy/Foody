@@ -1,25 +1,23 @@
-// @ts-nocheck
 import React from "react";
 import { View, Text, Image } from "react-native";
 import FastImage from "react-native-fast-image";
 
 import MasonryList from "@react-native-seoul/masonry-list";
 import { Pressable } from "react-native-gesture-handler";
-import CachedImage, { mealData } from "../../../helpers/Image";
 import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 import Animated, { FadeInDown } from "react-native-reanimated";
 import Progress from "./Progress";
 import { useNavigation } from "@react-navigation/native";
 
-const Recipes = ({ filteredRecipes = [], isLoading }) => {
+const Recipes = ({ filteredRecipes = [], isLoading }: any) => {
   const navigation = useNavigation();
-  const indexedData = filteredRecipes?.map((item, index) => ({
+  const indexedData = filteredRecipes?.map((item: any, index: number): any => ({
     ...item,
     index: index,
   }));
 
   return (
-    <View
+    <Animated.View
       entering={FadeInDown.delay(1000).duration(600).springify().damping(12)}
       className="mx-4 mt-7 flex-1 "
     >
@@ -33,7 +31,7 @@ const Recipes = ({ filteredRecipes = [], isLoading }) => {
             keyExtractor={(item) => item.idMeal}
             numColumns={2}
             showsVerticalScrollIndicator={false}
-            renderItem={({ item }) => (
+            renderItem={({ item }: any) => (
               <RecipeCard
                 item={item}
                 index={item.index}
@@ -43,13 +41,13 @@ const Recipes = ({ filteredRecipes = [], isLoading }) => {
           />
         </View>
       )}
-    </View>
+    </Animated.View>
   );
 };
 
 export default Recipes;
 
-const RecipeCard = ({ item, index, navigation }) => {
+const RecipeCard = ({ item, index, navigation }: any) => {
   if (!item) return null;
 
   const evenIndexNumber = index % 2 === 0;

@@ -1,7 +1,5 @@
-// @ts-nocheck
 import React, { act } from "react";
 import { Image, ScrollView, Text, View } from "react-native";
-import CachedImage, { categoryData } from "../../../helpers/Image";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -9,7 +7,11 @@ import {
 import { TouchableOpacity } from "react-native";
 import Animated, { FadeInDown } from "react-native-reanimated";
 
-const Categories = ({ activeCategory, setActiveCategory, categoryList }) => {
+const Categories = ({
+  activeCategory,
+  setActiveCategory,
+  categoryList,
+}: any) => {
   return (
     <>
       <Animated.View entering={FadeInDown.duration(500).springify()}>
@@ -17,17 +19,16 @@ const Categories = ({ activeCategory, setActiveCategory, categoryList }) => {
           className="space-x-4"
           horizontal
           showsHorizontalScrollIndicator={false}
-          contetntContainerStyle={{
+          contentContainerStyle={{
             paddingHorizontal: 15,
           }}
         >
-          {categoryList?.map((category, idCategory) => {
+          {categoryList?.map((category: any, idCategory: any) => {
             let isActive = activeCategory === category.strCategory;
             let activeBgColor = isActive ? "bg-amber-400" : "bg-gray-200";
             return (
               <TouchableOpacity
                 onPress={() => setActiveCategory(category.strCategory)}
-                key={category.name}
                 className="items-center justify-center mx-2"
                 key={idCategory}
               >

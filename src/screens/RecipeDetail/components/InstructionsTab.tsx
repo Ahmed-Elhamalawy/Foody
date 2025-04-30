@@ -1,12 +1,11 @@
-// @ts-nocheck
 import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 
-const InstructionsTab = ({ instructions, youtubeLink }) => {
+const InstructionsTab = ({ instructions, youtubeLink }: any) => {
   return (
     <View>
       <Text className="text-xl font-bold mb-4">How To Cook</Text>
-      {instructions.map((step, index) => (
+      {instructions.map((step: any, index: any) => (
         <View key={index} className="mb-5">
           <View className="flex-row items-start mb-2">
             <View className="bg-amber-100 h-8 w-8 rounded-full items-center justify-center mr-3 mt-1">

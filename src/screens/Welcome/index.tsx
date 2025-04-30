@@ -1,4 +1,3 @@
-// @ts-nocheck
 import React, { useEffect } from "react";
 import { Image, Text, View } from "react-native";
 import {
@@ -11,8 +10,6 @@ import Animated, {
   useAnimatedStyle,
 } from "react-native-reanimated";
 import { useNavigation } from "@react-navigation/native";
-import { RootStackParamList } from "../../navigation/types";
-import { StackNavigationProp } from "@react-navigation/stack";
 
 const WelcomeScreen = () => {
   const navigation = useNavigation();
@@ -20,7 +17,7 @@ const WelcomeScreen = () => {
   const ring2padding = useSharedValue(0);
 
   setTimeout(() => {
-    navigation.navigate("Home");
+    navigation.navigate("Home" as never);
   }, 2000);
 
   useEffect(() => {

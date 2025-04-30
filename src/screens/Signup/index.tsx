@@ -1,4 +1,3 @@
-// @ts-nocheck
 import React, { useState } from "react";
 import {
   View,
@@ -24,7 +23,7 @@ import { useSignup } from "../../hooks/Https";
 
 const SignupScreen = () => {
   const navigation = useNavigation();
-  const { mutate, isLoading, isError, error } = useSignup();
+  const { mutate, isError, error } = useSignup();
   const {
     control,
     handleSubmit,
@@ -37,7 +36,7 @@ const SignupScreen = () => {
     },
   });
 
-  const onSubmit = (data) => {
+  const onSubmit = (data: any) => {
     mutate(
       {
         fullName: data.fullname,
@@ -47,9 +46,9 @@ const SignupScreen = () => {
       {
         onSuccess: (response) => {
           console.log("User created:", response);
-          navigation.navigate("Login");
+          navigation.navigate("Login" as never);
         },
-        onError: (error) => {
+        onError: (error: any) => {
           console.error("Signup error:", error.response?.data?.error?.message);
         },
       }
@@ -214,7 +213,7 @@ const SignupScreen = () => {
                     {/* have an account / create new account */}
                     <TouchableOpacity
                       onPress={() => {
-                        navigation.navigate("Login");
+                        navigation.navigate("Login" as never);
                       }}
                     >
                       <Text
