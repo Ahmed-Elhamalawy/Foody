@@ -1,7 +1,17 @@
-import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
+import { heightPercentageToDP as hp } from "react-native-responsive-screen";
+import YoutubePlayer from "react-native-youtube-iframe";
 
 const InstructionsTab = ({ instructions, youtubeLink }: any) => {
+  const getYoutubeVideoId = (url: any) => {
+    const regex = /[?&]v=([^&#]*)/;
+    const match = url.match(regex);
+    if (match && match[1]) {
+      return match[1];
+    }
+    return null;
+  };
+
   return (
     <View>
       <Text className="text-xl font-bold mb-4">How To Cook</Text>
@@ -21,11 +31,16 @@ const InstructionsTab = ({ instructions, youtubeLink }: any) => {
       {/* Youtube link if available */}
       {youtubeLink && (
         <View className="mt-4 mb-8">
-          <TouchableOpacity className="bg-red-500 py-3 rounded-lg items-center flex-row justify-center">
+          {/* <TouchableOpacity className="bg-red-500 py-3 rounded-lg items-center flex-row justify-center">
             <Text className="text-white font-bold mr-2">
               Watch Video Tutorial
             </Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
+
+          <YoutubePlayer
+            height={hp(30)}
+            videoId={getYoutubeVideoId(youtubeLink)}
+          />
         </View>
       )}
     </View>

@@ -29,15 +29,17 @@ const RecipeDetail = ({ route }: any) => {
 
       {/* Hero image */}
       <View className="items-center">
-        <Image
-          style={{
-            height: hp(45),
-            borderBottomLeftRadius: 40,
-            borderBottomRightRadius: 40,
-          }}
-          className="w-full"
-          source={{ uri: data?.strMealThumb || recipe?.strMealThumb }}
-        />
+        {
+          <Image
+            style={{
+              height: hp(45),
+              borderBottomLeftRadius: 40,
+              borderBottomRightRadius: 40,
+            }}
+            className="w-full"
+            source={{ uri: data?.strMealThumb || recipe?.strMealThumb }}
+          />
+        }
       </View>
 
       {/* Recipe Header (Title, Region, Tags) */}
