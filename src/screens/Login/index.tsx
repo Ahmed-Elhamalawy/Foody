@@ -49,8 +49,9 @@ const LoginScreen = () => {
       {
         onSuccess: (response) => {
           console.log("User signed in:", response);
+          
           if (response.idToken) {
-            login(response.idToken);
+            login(response.idToken as string, data.email);
           }
 
           navigation.navigate("Home" as never);
